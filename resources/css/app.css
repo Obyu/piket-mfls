@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Dual-font mengikuti design system Stitch "Luminous Operations":
+ * Hanken Grotesk untuk heading, Inter untuk body text.
+ * Font-nya sendiri sudah dimuat lewat <link> di layouts/app.blade.php (fonts.bunny.net).
+ */
+body {
+    font-family: 'Inter', 'Figtree', ui-sans-serif, system-ui, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Hanken Grotesk', 'Figtree', ui-sans-serif, system-ui, sans-serif;
+}
