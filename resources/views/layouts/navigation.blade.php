@@ -6,7 +6,7 @@
     - Mobile (<md): nav ini jadi menu utama (sidebar disembunyikan), lengkap dengan
       semua link sesuai role, dibungkus Route::has() untuk link halaman baru.
 --}}
-<nav x-data="{ open: false }" class="bg-white border-b border-slate-100 md:ml-[280px]">
+<nav x-data="{ open: false }" class="bg-white border-b border-slate-200/60 md:ml-[272px]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex items-center md:hidden">
@@ -22,7 +22,7 @@
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-2xl text-slate-500 bg-white hover:text-slate-700 focus:outline-none transition ease-in-out duration-150">
+                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-xl text-navy-600 bg-white hover:text-navy-800 focus:outline-none transition ease-in-out duration-150">
                             <div>{{ Auth::user()->name }}</div>
 
                             <div class="ms-1">
@@ -76,9 +76,6 @@
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('admin.shifts.index')" :active="request()->routeIs('admin.shifts.*')">
                     {{ __('Shift Operasional') }}
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('admin.teams.index')" :active="request()->routeIs('admin.teams.*')">
-                    {{ __('Kelompok') }}
                 </x-responsive-nav-link>
                 @if(Route::has('admin.users.index'))
                     <x-responsive-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">

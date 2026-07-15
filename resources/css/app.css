@@ -3,14 +3,29 @@
 @tailwind utilities;
 
 /*
- * Dual-font mengikuti design system Stitch "Luminous Operations":
- * Hanken Grotesk untuk heading, Inter untuk body text.
- * Font-nya sendiri sudah dimuat lewat <link> di layouts/app.blade.php (fonts.bunny.net).
+ * Font utama: Poppins — mengikuti identitas website beasiswamncu.com
+ * Dimuat via Google Fonts CDN di layouts/app.blade.php dan layouts/guest.blade.php.
  */
 body {
-    font-family: 'Inter', 'Figtree', ui-sans-serif, system-ui, sans-serif;
+    font-family: 'Poppins', ui-sans-serif, system-ui, sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Hanken Grotesk', 'Figtree', ui-sans-serif, system-ui, sans-serif;
+    font-family: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 600;
+}
+
+/* Custom scrollbar untuk sidebar */
+.sidebar-scroll::-webkit-scrollbar {
+    width: 4px;
+}
+.sidebar-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+.sidebar-scroll::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+}
+.sidebar-scroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
 }

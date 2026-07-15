@@ -3,7 +3,7 @@
     Diadaptasi dari desain Stitch "pengaturan_shiftmanager".
 
     Variabel yang diharapkan controller (silakan sesuaikan nama kolom dengan skema aslimu):
-    - $users : koleksi User (id, name, email, role, team (relasi, nullable), is_active)
+    - $users : koleksi User (id, name, email, role, is_active)
 
     Route yang dipakai / diasumsikan (didaftarkan sendiri di web.php):
     - admin.settings.index        GET   -> halaman ini
@@ -72,7 +72,7 @@
                                 <th class="py-4 px-6">Nama Pengguna</th>
                                 <th class="py-4 px-6">Email</th>
                                 <th class="py-4 px-6">Role</th>
-                                <th class="py-4 px-6">Kelompok</th>
+                                <th class="py-4 px-6">Role</th>
                                 <th class="py-4 px-6">Status</th>
                             </tr>
                         </thead>
@@ -95,7 +95,6 @@
                                             <span class="bg-sky-50 text-sky-700 px-3 py-1 rounded-full text-xs font-semibold uppercase">Staff</span>
                                         @endif
                                     </td>
-                                    <td class="py-4 px-6 text-slate-600">{{ $user->team->name ?? '-' }}</td>
                                     <td class="py-4 px-6">
                                         {{-- Toggle visual (Alpine, client-side). Hubungkan ke route admin.settings.users.toggle kalau sudah dibuat. --}}
                                         <button type="button" @click="isActive = !isActive"
@@ -122,15 +121,6 @@
         <!-- Tab: Kelompok & Shift (quick links, tidak duplikat CRUD yang sudah ada) -->
         <div x-show="tab === 'lainnya'" x-transition.opacity style="display: none;">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <a href="{{ route('admin.teams.index') }}" class="bg-white border border-slate-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition flex items-center gap-4">
-                    <div class="bg-sky-50 text-sky-600 p-4 rounded-2xl">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
-                    </div>
-                    <div>
-                        <h3 class="font-semibold text-slate-800">Kelompok Piket</h3>
-                        <p class="text-sm text-slate-500">Kelola kelompok &amp; anggotanya di halaman Kelompok.</p>
-                    </div>
-                </a>
 
                 <a href="{{ route('admin.shifts.index') }}" class="bg-white border border-slate-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition flex items-center gap-4">
                     <div class="bg-purple-50 text-purple-600 p-4 rounded-2xl">
@@ -176,16 +166,6 @@
                             class="mt-1 block w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-2xl focus:border-sky-400 focus:ring focus:ring-sky-200 focus:ring-opacity-50 transition shadow-sm">
                             <option value="staff">Staff</option>
                             <option value="admin">Admin</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-slate-700">Kelompok</label>
-                        <select name="team_id"
-                            class="mt-1 block w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-2xl focus:border-sky-400 focus:ring focus:ring-sky-200 focus:ring-opacity-50 transition shadow-sm">
-                            <option value="">-- Tanpa Kelompok --</option>
-                            @foreach($teams ?? [] as $team)
-                                <option value="{{ $team->id }}">{{ $team->name }}</option>
-                            @endforeach
                         </select>
                     </div>
                 </div>

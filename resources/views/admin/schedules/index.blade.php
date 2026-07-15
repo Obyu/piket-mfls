@@ -60,14 +60,25 @@
             </div>
 
             @if($scheduleWeek && $scheduleWeek->isDraft())
-                <form method="POST" action="{{ route('admin.schedules.publishWeek', $scheduleWeek->id) }}">
-                    @csrf
-                    <button type="submit" onclick="return confirm('Publish jadwal minggu ini? Staff akan langsung bisa melihatnya.')"
-                            class="bg-emerald-500 hover:bg-emerald-600 text-white font-medium px-5 py-2.5 rounded-2xl shadow-sm transition transform active:scale-95 flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                        Publish Minggu Ini
-                    </button>
-                </form>
+                <div class="flex gap-3">
+                    <form method="POST" action="{{ route('admin.schedules.autoFill', $scheduleWeek->id) }}">
+                        @csrf
+                        <button type="submit" onclick="return confirm('Acak otomatis tugas untuk semua shift di minggu ini?')"
+                                class="bg-indigo-500 hover:bg-indigo-600 text-white font-medium px-5 py-2.5 rounded-2xl shadow-sm transition transform active:scale-95 flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+                            Auto Fill (Acak)
+                        </button>
+                    </form>
+
+                    <form method="POST" action="{{ route('admin.schedules.publishWeek', $scheduleWeek->id) }}">
+                        @csrf
+                        <button type="submit" onclick="return confirm('Publish jadwal minggu ini? Staff akan langsung bisa melihatnya.')"
+                                class="bg-emerald-500 hover:bg-emerald-600 text-white font-medium px-5 py-2.5 rounded-2xl shadow-sm transition transform active:scale-95 flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                            Publish Minggu Ini
+                        </button>
+                    </form>
+                </div>
             @endif
         </div>
 

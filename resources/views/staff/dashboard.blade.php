@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-slate-800 leading-tight">
+        <h2 class="font-semibold text-xl text-navy-800 leading-tight">
             {{ __('Dashboard Piket & Absensi') }}
         </h2>
     </x-slot>
@@ -46,12 +46,12 @@
         @endif
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="bg-white border border-slate-100 shadow-sm rounded-2xl p-6">
-                <div class="flex justify-between items-center border-b border-slate-100 pb-2 mb-4">
-                    <h3 class="text-lg font-semibold text-slate-800">Informasi Jadwal Hari Ini</h3>
+            <div class="bg-white border border-slate-200/60 shadow-sm rounded-2xl p-6">
+                <div class="flex justify-between items-center border-b border-slate-200/60 pb-2 mb-4">
+                    <h3 class="text-lg font-semibold text-navy-800">Informasi Jadwal Hari Ini</h3>
                     @if($schedule)
                         <button x-data="" x-on:click.prevent="$dispatch('open-modal', 'write-handover-modal')"
-                                class="text-sky-600 bg-sky-50 hover:bg-sky-100 text-sm px-3 py-1.5 rounded-xl font-medium transition flex items-center gap-1">
+                                class="text-brand-400 bg-brand-300/10 hover:bg-brand-300/20 text-sm px-3 py-1.5 rounded-xl font-medium transition flex items-center gap-1">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" clip-rule="evenodd" /></svg>
                             Tulis Operan
                         </button>
@@ -64,7 +64,7 @@
                             <span class="text-slate-500">Rekan Piket:</span>
                             <div class="flex items-center -space-x-2">
                                 @forelse($schedule->staff as $mate)
-                                    <div title="{{ $mate->name }}" class="w-7 h-7 rounded-full bg-sky-100 text-sky-700 border-2 border-white flex items-center justify-center text-xs font-semibold">
+                                    <div title="{{ $mate->name }}" class="w-7 h-7 rounded-full bg-navy-700/10 text-navy-700 border-2 border-white flex items-center justify-center text-xs font-semibold">
                                         {{ strtoupper(substr($mate->name, 0, 1)) }}
                                     </div>
                                 @empty
@@ -74,17 +74,17 @@
                         </div>
                         <div class="flex justify-between items-center">
                             <span class="text-slate-500">Shift Kerja:</span>
-                            <span class="font-medium text-slate-900">{{ $schedule->shift->name }}</span>
+                            <span class="font-medium text-navy-900">{{ $schedule->shift->name }}</span>
                         </div>
                         <div class="flex justify-between items-center">
                             <span class="text-slate-500">Waktu:</span>
-                            <span class="font-medium text-sky-600 bg-sky-50 px-3 py-1 rounded-full text-sm">
+                            <span class="font-medium text-brand-400 bg-brand-300/10 px-3 py-1 rounded-full text-sm">
                                 {{ \Carbon\Carbon::parse($schedule->shift->start_time)->format('H:i') }} - {{ \Carbon\Carbon::parse($schedule->shift->end_time)->format('H:i') }} WIB
                             </span>
                         </div>
                         <div class="flex justify-between items-center">
                             <span class="text-slate-500">Lokasi:</span>
-                            <span class="font-medium uppercase tracking-wide {{ $schedule->shift->location === 'mncu' ? 'text-sky-700 bg-sky-50' : 'text-purple-700 bg-purple-50' }} px-3 py-1 rounded-full text-sm">
+                            <span class="font-medium uppercase tracking-wide {{ $schedule->shift->location === 'mncu' ? 'text-navy-700 bg-navy-700/10' : 'text-brand-500 bg-brand-300/10' }} px-3 py-1 rounded-full text-sm">
                                 {{ $schedule->shift->location }}
                             </span>
                         </div>
@@ -99,7 +99,7 @@
                 @endif
             </div>
 
-            <div class="bg-white border border-slate-100 shadow-sm rounded-2xl p-6 flex flex-col justify-center items-center text-center">
+            <div class="bg-white border border-slate-200/60 shadow-sm rounded-2xl p-6 flex flex-col justify-center items-center text-center">
                 @if(!$schedule)
                     <p class="text-slate-500">Absensi tidak tersedia. Silakan hubungi Sekretaris jika ada kesalahan jadwal.</p>
                 @else
@@ -108,7 +108,7 @@
                         <form action="{{ route('staff.checkin') }}" method="POST">
                             @csrf
                             <input type="hidden" name="picket_schedule_id" value="{{ $schedule->id }}">
-                            <button type="submit" class="bg-sky-500 hover:bg-sky-600 text-white font-semibold px-8 py-4 rounded-2xl shadow-sm transition transform active:scale-95 text-lg w-full md:w-auto">
+                            <button type="submit" class="bg-navy-700 hover:bg-navy-600 text-white font-semibold px-8 py-4 rounded-2xl shadow-md transition transform active:scale-95 text-lg w-full md:w-auto">
                                 Check-In Sekarang
                             </button>
                         </form>
@@ -116,17 +116,17 @@
                         <div class="mb-2 text-emerald-600 font-medium bg-emerald-50 px-4 py-2 rounded-2xl inline-block">
                             Status: Sedang Bertugas
                         </div>
-                        <p class="text-slate-500 mb-6">Waktu Check-In: <span class="font-semibold text-slate-800">{{ \Carbon\Carbon::parse($absence->check_in_time)->format('H:i') }} WIB</span></p>
+                        <p class="text-slate-500 mb-6">Waktu Check-In: <span class="font-semibold text-navy-800">{{ \Carbon\Carbon::parse($absence->check_in_time)->format('H:i') }} WIB</span></p>
                         
                         <form action="{{ route('staff.checkout', $absence->id) }}" method="POST">
                             @csrf
                             @method('PUT')
-                            <button type="submit" onclick="return confirm('Apakah Anda yakin shift sudah selesai dan ingin Check-Out?')" class="bg-rose-500 hover:bg-rose-600 text-white font-semibold px-8 py-4 rounded-2xl shadow-sm transition transform active:scale-95 text-lg w-full md:w-auto">
+                            <button type="submit" onclick="return confirm('Apakah Anda yakin shift sudah selesai dan ingin Check-Out?')" class="bg-rose-500 hover:bg-rose-600 text-white font-semibold px-8 py-4 rounded-2xl shadow-md transition transform active:scale-95 text-lg w-full md:w-auto">
                                 Check-Out (Selesai Shift)
                             </button>
                         </form>
                     @else
-                        <div class="text-slate-800">
+                        <div class="text-navy-800">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-emerald-500 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
@@ -147,19 +147,19 @@
         <x-modal name="write-handover-modal" focusable>
             <form method="POST" action="{{ route('staff.notifications.store') }}" class="p-6">
                 @csrf
-                <h2 class="text-lg font-medium text-slate-900 mb-2">Tulis Catatan Operan</h2>
+                <h2 class="text-lg font-medium text-navy-900 mb-2">Tulis Catatan Operan</h2>
                 <p class="text-sm text-slate-500 mb-4">Catatan ini akan tampil sebagai alert untuk kelompok yang bertugas di shift berikutnya, lokasi &amp; tanggal yang sama.</p>
 
                 <input type="hidden" name="picket_schedule_id" value="{{ $schedule->id }}">
-                <div class="bg-sky-50 text-sky-700 text-sm px-4 py-3 rounded-2xl mb-4">
-                    Untuk jadwal: <strong>{{ $schedule->team->name }} ({{ $schedule->shift->name }})</strong>
+                <div class="bg-navy-50 text-navy-700 text-sm px-4 py-3 rounded-2xl mb-4">
+                    Untuk jadwal: <strong>{{ $schedule->shift->name }}</strong>
                     &mdash; {{ \Carbon\Carbon::parse($schedule->date)->translatedFormat('d M Y') }}
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-slate-700">Pesan untuk Shift Selanjutnya</label>
+                    <label class="block text-sm font-medium text-navy-700">Pesan untuk Shift Selanjutnya</label>
                     <textarea name="message" rows="4" required placeholder="Contoh: Tolong lanjutkan follow up 5 leads baru dari DM Instagram..."
-                        class="mt-1 block w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-2xl focus:border-sky-400 focus:ring focus:ring-sky-200 focus:ring-opacity-50 transition shadow-sm"></textarea>
+                        class="mt-1 block w-full bg-navy-50/50 border border-slate-200 text-navy-900 rounded-2xl focus:border-brand-300 focus:ring focus:ring-brand-200 focus:ring-opacity-50 transition shadow-sm"></textarea>
                 </div>
 
                 <div class="mt-6 flex justify-end gap-3">
@@ -168,7 +168,7 @@
                         Batal
                     </button>
                     <button type="submit"
-                            class="px-5 py-2.5 bg-sky-500 text-white rounded-2xl hover:bg-sky-600 transition active:scale-95 font-medium shadow-sm">
+                            class="px-5 py-2.5 bg-brand-300 text-navy-900 rounded-2xl hover:bg-brand-200 transition active:scale-95 font-medium shadow-sm">
                         Kirim Operan
                     </button>
                 </div>

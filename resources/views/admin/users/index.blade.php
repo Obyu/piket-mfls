@@ -45,7 +45,6 @@
                             <th class="py-4 px-6">Nama</th>
                             <th class="py-4 px-6">Email</th>
                             <th class="py-4 px-6">Role</th>
-                            <th class="py-4 px-6">Kelompok</th>
                             <th class="py-4 px-6 text-right">Aksi</th>
                         </tr>
                     </thead>
@@ -68,7 +67,6 @@
                                         <span class="bg-sky-50 text-sky-700 px-3 py-1 rounded-full text-xs font-semibold uppercase">Staff</span>
                                     @endif
                                 </td>
-                                <td class="py-4 px-6 text-slate-600">{{ $user->team->name ?? '-' }}</td>
                                 <td class="py-4 px-6 text-right">
                                     <button type="button"
                                             x-data=""
@@ -116,16 +114,6 @@
                                                     class="mt-1 block w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-2xl focus:border-sky-400 focus:ring focus:ring-sky-200 focus:ring-opacity-50 transition shadow-sm">
                                                     <option value="staff" {{ $user->role === 'staff' ? 'selected' : '' }}>Staff</option>
                                                     <option value="admin" {{ $user->role === 'admin' ? 'selected' : '' }}>Admin</option>
-                                                </select>
-                                            </div>
-                                            <div>
-                                                <label class="block text-sm font-medium text-slate-700">Kelompok</label>
-                                                <select name="team_id"
-                                                    class="mt-1 block w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-2xl focus:border-sky-400 focus:ring focus:ring-sky-200 focus:ring-opacity-50 transition shadow-sm">
-                                                    <option value="">-- Tanpa Kelompok --</option>
-                                                    @foreach($teams as $team)
-                                                        <option value="{{ $team->id }}" {{ $user->team_id == $team->id ? 'selected' : '' }}>{{ $team->name }}</option>
-                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
@@ -184,16 +172,6 @@
                             class="mt-1 block w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-2xl focus:border-sky-400 focus:ring focus:ring-sky-200 focus:ring-opacity-50 transition shadow-sm">
                             <option value="staff">Staff</option>
                             <option value="admin">Admin</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-slate-700">Kelompok</label>
-                        <select name="team_id"
-                            class="mt-1 block w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-2xl focus:border-sky-400 focus:ring focus:ring-sky-200 focus:ring-opacity-50 transition shadow-sm">
-                            <option value="">-- Tanpa Kelompok --</option>
-                            @foreach($teams as $team)
-                                <option value="{{ $team->id }}">{{ $team->name }}</option>
-                            @endforeach
                         </select>
                     </div>
                 </div>

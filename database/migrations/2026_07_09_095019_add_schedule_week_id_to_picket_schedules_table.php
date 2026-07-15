@@ -23,9 +23,6 @@ return new class extends Migration
                 ->constrained('schedule_weeks')->onDelete('cascade');
         });
 
-        Schema::table('picket_schedules', function (Blueprint $table) {
-            $table->foreignId('team_id')->nullable()->change();
-        });
     }
 
     public function down(): void

@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Auth; // Tambahan wajib untuk fitur redirect dash
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\PicketScheduleController;
 use App\Http\Controllers\Admin\ShiftController;
-use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Staff\AbsenceController;
 use App\Http\Controllers\Staff\LeadController;
@@ -14,7 +13,6 @@ use App\Http\Controllers\Staff\NotificationController;
 use App\Models\PicketSchedule;
 use App\Models\ScheduleWeek;
 use App\Models\Shift;
-use App\Models\Team;
 use App\Models\User;
 
 Route::get('/', function () {
@@ -43,7 +41,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::middleware(['role:admin'])->prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', function () {
             $data = [
-                'total_teams' => Team::count(),
                 'total_shifts' => Shift::count(),
                 'total_staff' => User::where('role', 'staff')->count(),
                 'current_week' => ScheduleWeek::orderByDesc('week_start_date')->first(),
@@ -56,7 +53,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
             return view('admin.dashboard', $data);
         })->name('dashboard');
 
-        Route::resource('teams', TeamController::class)->except(['create', 'show', 'edit']);
         Route::resource('shifts', ShiftController::class)->except(['create', 'show', 'edit']);
 
         // BARU: Manajemen Pengguna (Users) — requirement bagian B, belum ada sebelumnya.
@@ -70,6 +66,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/schedules/generate-week', [PicketScheduleController::class, 'generateWeek'])->name('schedules.generateWeek');
         Route::post('/schedules/{schedule}/assign', [PicketScheduleController::class, 'assignStaff'])->name('schedules.assign');
         Route::post('/schedules/week/{scheduleWeek}/publish', [PicketScheduleController::class, 'publishWeek'])->name('schedules.publishWeek');
+        Route::post('/schedules/week/{scheduleWeek}/auto-fill', [PicketScheduleController::class, 'autoFill'])->name('schedules.autoFill');
         Route::delete('/schedules/{schedule}', [PicketScheduleController::class, 'destroy'])->name('schedules.destroy');
     });
 

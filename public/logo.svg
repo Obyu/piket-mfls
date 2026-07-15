@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- Shield body -->
+  <path d="M60 8L16 28V62C16 86 36 106 60 114C84 106 104 86 104 62V28L60 8Z" fill="#1a2332"/>
+  <!-- Shield inner border -->
+  <path d="M60 14L22 32V62C22 82.5 39.5 100 60 107.5C80.5 100 98 82.5 98 62V32L60 14Z" fill="#0f1b2d" stroke="#d4a843" stroke-width="2"/>
+  <!-- Gold accent line top -->
+  <path d="M38 38H82" stroke="#d4a843" stroke-width="2" stroke-linecap="round"/>
+  <!-- MFLS text -->
+  <text x="60" y="68" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="22" font-weight="700" fill="#d4a843" letter-spacing="3">MFLS</text>
+  <!-- Gold accent line bottom -->
+  <path d="M38 78H82" stroke="#d4a843" stroke-width="2" stroke-linecap="round"/>
+  <!-- Small star accent -->
+  <polygon points="60,86 62,91 67,91 63,94 65,99 60,96 55,99 57,94 53,91 58,91" fill="#f0d68a"/>
+</svg>

@@ -15,7 +15,7 @@ return new class extends Migration
                 $table->id();
                 $table->date('date');
                 $table->foreignId('shift_id')->constrained('shifts')->onDelete('cascade');
-                $table->foreignId('team_id')->constrained('teams')->onDelete('cascade');
+
                 $table->timestamps();
             });
         }

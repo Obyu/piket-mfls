@@ -7,27 +7,27 @@
 
     <title>Aplikasi Piket - Pengurus MNCU Future Leader</title>
 
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600|hanken-grotesk:600,700|inter:400,500,600&display=swap" rel="stylesheet" />
+    <link rel="icon" href="{{ asset('logo.svg') }}" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="font-sans antialiased bg-[#f9f9ff] text-slate-800">
+<body class="font-sans antialiased bg-navy-50 text-slate-800">
     <div class="min-h-screen">
-        {{-- Sidebar desktop bergaya Stitch (baru). Menu mobile tetap di navigation.blade.php --}}
         @include('layouts.partials.sidebar')
-
         @include('layouts.navigation')
 
         @isset($header)
-            <header class="bg-white border-b border-slate-100 md:ml-[280px]">
+            <header class="bg-white border-b border-slate-200/60 md:ml-[272px]">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     {{ $header }}
                 </div>
             </header>
         @endisset
 
-        <main class="py-8 md:ml-[280px]">
+        <main class="py-8 md:ml-[272px]">
             {{ $slot }}
         </main>
     </div>

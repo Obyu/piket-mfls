@@ -115,6 +115,33 @@ class PicketScheduleController extends Controller
     }
 
     /**
+     * Secara otomatis menugaskan anggota (staff) secara acak ke setiap slot (shift)
+     * di minggu terkait.
+     */
+    public function autoFill(ScheduleWeek $scheduleWeek)
+    {
+        // Ambil semua staff aktif
+        $staffMembers = User::where('role', 'staff')->get();
+        
+        if ($staffMembers->isEmpty()) {
+            return back()->withErrors(['message' => 'Tidak ada anggota staff yang tersedia untuk ditugaskan.']);
+        }
+
+        // Ambil semua slot (PicketSchedule) untuk minggu ini
+        $schedules = PicketSchedule::where('schedule_week_id', $scheduleWeek->id)->get();
+
+        foreach ($schedules as $schedule) {
+            // Kita acak urutan staff dan ambil 2 orang per shift (bisa disesuaikan)
+            $randomStaff = $staffMembers->shuffle()->take(2)->pluck('id')->toArray();
+            
+            // Assign ke jadwal
+            $schedule->staff()->sync($randomStaff);
+        }
+
+        return back()->with('success', 'Anggota berhasil diassign secara otomatis dan acak ke jadwal minggu ini.');
+    }
+
+    /**
      * Hapus satu slot (misal shift tambahan yang ternyata tidak dipakai di tanggal itu).
      * Bukan untuk hapus keseluruhan minggu.
      */
